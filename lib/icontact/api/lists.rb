@@ -7,8 +7,8 @@ module IContact
         resource(response, 'list')
       end
 
-      def get_lists
-        response = get(lists_path)
+      def get_lists(limit = 10000)
+        response = get(lists_path + query(limit: limit))
         resource(response, 'lists')
       end
 

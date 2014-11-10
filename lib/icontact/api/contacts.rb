@@ -7,8 +7,8 @@ module IContact
         resource(response, 'contact')
       end
 
-      def get_contacts
-        response = get(contacts_path)
+      def get_contacts(limit = 10000)
+        response = get(contacts_path + query(limit: limit))
         resource(response, 'contacts')
       end
 
@@ -43,6 +43,7 @@ module IContact
       end
 
       def find_contacts(data)
+        data.merge!(limit: 10000) unless data.has_key?(:limit)
         response = get(contacts_path + query(data))
         resource(response, 'contacts')
       end

@@ -7,8 +7,8 @@ module IContact
         resource(response, 'clientfolder')
       end
 
-      def get_client_folders
-        response = get(client_folders_path)
+      def get_client_folders(limit = 10000)
+        response = get(client_folders_path + query(limit: limit))
         resource(response, 'clientfolders')
       end
 
