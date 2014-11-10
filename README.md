@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/L1h3r/icontact.svg)](https://travis-ci.org/L1h3r/icontact)
+
 Ruby Gem for iContact
 ---
 
