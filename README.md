@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/icontact.svg)](http://badge.fury.io/rb/icontact)
 [![Code Climate](https://codeclimate.com/github/L1h3r/icontact/badges/gpa.svg)](https://codeclimate.com/github/L1h3r/icontact)
 
 Ruby Gem for iContact

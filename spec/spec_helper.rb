@@ -16,7 +16,7 @@ end
 VCR.configure do |config|
   config.default_cassette_options = { record: :new_episodes }
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.debug_logger = File.open('log/vcr.log', 'w')
+  # config.debug_logger = File.open('log/vcr.log', 'w')
   config.hook_into :webmock
 
   config.filter_sensitive_data('<-APP-ID->') { options['app_id'] }
