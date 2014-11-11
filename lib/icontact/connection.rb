@@ -62,7 +62,7 @@ module IContact
     def response_success(response)
       if response.env[:method] == :delete
         { 'status' => true }
-      elsif !response.body.strip.empty?
+      elsif resposne.body.present? && !response.body.strip.empty?
         Oj.load(response.body, mode: :compat)
       else
         []
