@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    icontact (0.0.1)
+    icontact (0.0.2)
       faraday (~> 0.8)
       oj (~> 2.11)
 
@@ -18,7 +18,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     i18n (0.6.11)
     multipart-post (2.0.0)
-    oj (2.11.0)
+    oj (2.11.1)
     rake (10.3.2)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
