@@ -1,4 +1,3 @@
-config/*.yml
-spec/fixtures/vcr_cassettes/*.yml
+spec/*.yml
 *.log
 pkg/

@@ -3,6 +3,7 @@ module IContact
     module ClientFolders
 
       def get_client_folder(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = get(client_folders_path + id)
         resource(response, 'clientfolder')
       end
@@ -23,11 +24,13 @@ module IContact
       end
 
       def update_client_folder(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = post(client_folders_path + id, data)
         resource(response, 'clientfolder')
       end
 
       def update_client_folder!(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = put(client_folders_path + id, data)
         resource(response, 'clientfolder')
       end

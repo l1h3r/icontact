@@ -3,6 +3,7 @@ module IContact
     module Lists
 
       def get_list(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = get(lists_path + id)
         resource(response, 'list')
       end
@@ -23,11 +24,13 @@ module IContact
       end
 
       def update_list(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = post(lists_path + id, data)
         resource(response, 'list')
       end
 
       def update_list!(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = put(lists_path + id, data)
         resource(response, 'list')
       end
@@ -38,6 +41,7 @@ module IContact
       end
 
       def delete_list(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = delete(lists_path + id)
         resource(response, 'status')
       end
@@ -45,7 +49,7 @@ module IContact
       private
 
       def lists_path
-        "/icp/a/#{account_id}/c/#{client_id}/lists/"
+        "/icp/a/#{account_id}/c/#{client_folder_id}/lists/"
       end
 
     end

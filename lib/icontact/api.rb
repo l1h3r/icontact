@@ -1,17 +1,13 @@
-require 'faraday'
-require 'oj'
-
 require_relative 'connection'
-require_relative 'api/client_folders'
-require_relative 'api/contacts'
-require_relative 'api/custom_fields'
-require_relative 'api/lists'
-require_relative 'api/subscriptions'
-require_relative 'api/users'
+
+Dir[File.dirname(__FILE__) + '/api/*'].each do |file|
+  require file
+end
 
 module IContact
   class Api
     include Connection
+    include Accounts
     include ClientFolders
     include Contacts
     include CustomFields
@@ -19,30 +15,26 @@ module IContact
     include Subscriptions
     include Users
 
-    attr_accessor :account_id, :client_id
-    attr_reader :app_id, :username, :password, :accounts, :clients
+    attr_accessor :account_id, :client_folder_id
+    attr_reader :app_id, :username, :password
 
     def initialize(username, password, app_id)
+      raise ArgumentError, 'Username cannot be nil' if username.nil?
+      raise ArgumentError, 'Password cannot be nil' if password.nil?
+      raise ArgumentError, 'App ID cannot be nil' if app_id.nil?
+
       @app_id     = app_id
       @username   = username
       @password   = password
       @account_id = get_accounts.first['accountId']
-      @client_id  = get_clients.first['clientFolderId']
-    end
-
-    def get_accounts
-      response  = get('/icp/a/')
-      @accounts = resource(response, 'accounts')
-    end
-
-    def get_clients
-      response = get("/icp/a/#{account_id}/c")
-      @clients = resource(response, 'clientfolders')
+      raise IContact::NotAuthorized, 'Unable to find account' if account_id.nil?
+      @client_folder_id = get_client_folders.first['clientFolderId']
+      raise IContact::NotAuthorized, 'Unable to find client folder' if client_folder_id.nil?
     end
 
     def ping
-      return false if account_id.nil? || client_id.nil?
-      url = "#{BASE_URL}/icp/a/#{account_id}/c/#{client_id}/"
+      return false if account_id.nil? || client_folder_id.nil?
+      url = "#{BASE_URL}/icp/a/#{account_id}/c/#{client_folder_id}/"
       response = connection.run_request(:get, url, '', headers)
       response.status.to_i == 200
     end

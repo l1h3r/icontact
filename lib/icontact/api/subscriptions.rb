@@ -3,6 +3,7 @@ module IContact
     module Subscriptions
 
       def get_subscription(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = get(subscriptions_path + id)
         resource(response, 'subscription')
       end
@@ -23,11 +24,13 @@ module IContact
       end
 
       def update_subscription(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = post(subscriptions_path + id, data)
         resource(response, 'subscription')
       end
 
       def move_contact(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = put(subscriptions_path + id, data)
         resource(response, 'subscription')
       end
@@ -40,7 +43,7 @@ module IContact
       private
 
       def subscriptions_path
-        "/icp/a/#{account_id}/c/#{client_id}/subscriptions/"
+        "/icp/a/#{account_id}/c/#{client_folder_id}/subscriptions/"
       end
 
     end

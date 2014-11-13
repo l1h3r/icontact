@@ -3,6 +3,7 @@ module IContact
     module CustomFields
 
       def get_custom_field(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = get(custom_fields_path + id)
         resource(response, 'customfield')
       end
@@ -23,11 +24,13 @@ module IContact
       end
 
       def update_custom_field(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = post(custom_fields_path + id, data)
         resource(response, 'customfield')
       end
 
       def update_custom_field!(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = put(custom_fields_path + id, data)
         resource(response, 'customfield')
       end
@@ -38,6 +41,7 @@ module IContact
       end
 
       def delete_custom_field(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = delete(custom_fields_path + id)
         resource(response, 'status')
       end
@@ -45,7 +49,7 @@ module IContact
       private
 
       def custom_fields_path
-        "/icp/a/#{account_id}/c/#{client_id}/customfields/"
+        "/icp/a/#{account_id}/c/#{client_folder_id}/customfields/"
       end
 
     end

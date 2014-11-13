@@ -3,6 +3,7 @@ module IContact
     module Users
 
       def get_user(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = get(users_path + id)
         resource(response, 'user')
       end
@@ -23,6 +24,7 @@ module IContact
       end
 
       def update_user(id, data)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = post(users_path + id, data)
         resource(response, 'user')
       end
@@ -33,6 +35,7 @@ module IContact
       end
 
       def delete_user(id)
+        raise ArgumentError, 'ID cannot be nil' if id.nil?
         response = delete(users_path + id)
         resource(response, 'status')
       end

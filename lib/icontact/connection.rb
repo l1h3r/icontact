@@ -13,10 +13,12 @@ module IContact
     end
 
     def post(path, data)
+      raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
       request(:post, path, data)
     end
 
     def put(path, data)
+      raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
       request(:put, path, data)
     end
 
@@ -52,8 +54,6 @@ module IContact
       case response.status.to_i
       when 200..299
         response_success(response)
-      when 404 # Return empty array instead of throwing an error
-        []
       else
         IContact::ErrorHandler.new(response)
       end
