@@ -53,13 +53,13 @@ module IContact
       data.respond_to?(:to_ary) ? data.to_ary : [data]
     end
 
-    def resource(data, field, position = nil)
-      if data.empty? || data[field].nil?
+    def resource(data, collection, first = false)
+      if data.empty? || data[collection].nil?
         []
-      elsif position.nil?
-        data[field]
+      elsif first
+        data[collection].first
       else
-        data[field][position]
+        data[collection]
       end
     end
 

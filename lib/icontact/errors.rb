@@ -28,7 +28,7 @@ module IContact
   class IContact::UnsupportedMediaType < IContactError; end
 
   class ErrorHandler
-    ERRORS = {
+    MAPPED_ERRORS = {
       400 => IContact::BadRequest,
       401 => IContact::NotAuthorized,
       402 => IContact::PaymentRequest,
@@ -44,8 +44,8 @@ module IContact
     }
 
     def initialize(response)
-      error_class = ERRORS[response.status.to_i]
-      message = Oj.load(response.body)['errors']
+      error_class = MAPPED_ERRORS[response.status.to_i]
+      message = Oj.load(response.body || {})['errors']
 
       if error_class
         raise error_class.new(message)

@@ -3,7 +3,7 @@ module IContact
     module Lists
 
       def get_list(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = get(lists_path + id)
         resource(response, 'list')
       end
@@ -15,7 +15,7 @@ module IContact
 
       def create_list(data)
         response = post(lists_path, wrap(data))
-        resource(response, 'lists', 0)
+        resource(response, 'lists', true)
       end
 
       def create_lists(data)
@@ -24,13 +24,13 @@ module IContact
       end
 
       def update_list(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = post(lists_path + id, data)
         resource(response, 'list')
       end
 
       def update_list!(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = put(lists_path + id, data)
         resource(response, 'list')
       end
@@ -41,7 +41,7 @@ module IContact
       end
 
       def delete_list(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = delete(lists_path + id)
         resource(response, 'status')
       end
