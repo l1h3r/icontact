@@ -13,12 +13,12 @@ module IContact
     end
 
     def post(path, data)
-      raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
+      ensure_valid(data)
       request(:post, path, data)
     end
 
     def put(path, data)
-      raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
+      ensure_valid_data(data)
       request(:put, path, data)
     end
 
@@ -45,7 +45,7 @@ module IContact
     end
 
     def request(method, path, data = {})
-      request  = data.empty? ? '' : Oj.dump(data, mode: :compat)
+      request  = Oj.dump((data || {}), mode: :compat)
       response = connection.run_request(method, BASE_URL + path, request, headers)
       handle_response(response)
     end
@@ -62,11 +62,17 @@ module IContact
     def response_success(response)
       if response.env[:method] == :delete
         { 'status' => true }
-      elsif !response.body.nil? && !response.body.strip.empty?
-        Oj.load(response.body, mode: :compat)
       else
-        []
+        Oj.load((response.body || ''), mode: :compat)
       end
+    end
+
+    def ensure_valid_id(id)
+      raise ArgumentError, 'ID cannot be nil' if id.nil?
+    end
+
+    def ensure_valid_data(data)
+      raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
     end
 
   end

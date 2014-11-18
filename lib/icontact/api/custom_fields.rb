@@ -3,7 +3,7 @@ module IContact
     module CustomFields
 
       def get_custom_field(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = get(custom_fields_path + id)
         resource(response, 'customfield')
       end
@@ -15,7 +15,7 @@ module IContact
 
       def create_custom_field(data)
         response = post(custom_fields_path, wrap(data))
-        resource(response, 'customfields', 0)
+        resource(response, 'customfields', true)
       end
 
       def create_custom_fields(data)
@@ -24,13 +24,13 @@ module IContact
       end
 
       def update_custom_field(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = post(custom_fields_path + id, data)
         resource(response, 'customfield')
       end
 
       def update_custom_field!(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = put(custom_fields_path + id, data)
         resource(response, 'customfield')
       end
@@ -41,7 +41,7 @@ module IContact
       end
 
       def delete_custom_field(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = delete(custom_fields_path + id)
         resource(response, 'status')
       end

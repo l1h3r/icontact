@@ -3,7 +3,7 @@ module IContact
     module Subscriptions
 
       def get_subscription(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = get(subscriptions_path + id)
         resource(response, 'subscription')
       end
@@ -15,7 +15,7 @@ module IContact
 
       def create_subscription(data)
         response = post(subscriptions_path, wrap(data))
-        resource(response, 'subscriptions', 0)
+        resource(response, 'subscriptions', true)
       end
 
       def create_subscriptions(data)
@@ -24,13 +24,13 @@ module IContact
       end
 
       def update_subscription(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = post(subscriptions_path + id, data)
         resource(response, 'subscription')
       end
 
       def move_contact(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = put(subscriptions_path + id, data)
         resource(response, 'subscription')
       end

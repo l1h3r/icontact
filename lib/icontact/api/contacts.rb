@@ -3,7 +3,7 @@ module IContact
     module Contacts
 
       def get_contact(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = get(contacts_path + id)
         resource(response, 'contact')
       end
@@ -15,7 +15,7 @@ module IContact
 
       def create_contact(data)
         response = post(contacts_path, wrap(data))
-        resource(response, 'contacts', 0)
+        resource(response, 'contacts', true)
       end
 
       def create_contacts(data)
@@ -24,13 +24,13 @@ module IContact
       end
 
       def update_contact(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = post(contacts_path + id, data)
         resource(response, 'contact')
       end
 
       def update_contact!(id, data)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = put(contacts_path + id, data)
         resource(response, 'contact')
       end
@@ -41,13 +41,13 @@ module IContact
       end
 
       def delete_contact(id)
-        raise ArgumentError, 'ID cannot be nil' if id.nil?
+        ensure_valid_id(id)
         response = delete(contacts_path + id)
         resource(response, 'status')
       end
 
       def find_contacts(data)
-        raise ArgumentError, 'Data cannot be empty' if data.nil? || data.empty?
+        ensure_valid_data(data)
         data.merge!(limit: 10000) unless data.has_key?(:limit)
         response = get(contacts_path + query(data))
         resource(response, 'contacts')
