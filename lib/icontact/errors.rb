@@ -44,11 +44,12 @@ module IContact
     }
 
     def initialize(response)
-      error_class = MAPPED_ERRORS[response.status.to_i]
-      message = Oj.load(response.body || {})['errors']
+      klass   = MAPPED_ERRORS[response.status.to_i]
+      parsed  = Oj.load(response.body || '')
+      message = parsed.nil? ? '' : parsed['errors']
 
-      if error_class
-        raise error_class.new(message)
+      if klass
+        raise klass.new(message)
       else
         raise IContactError.new("#{response.status}: #{message}")
       end
