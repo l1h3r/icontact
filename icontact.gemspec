@@ -1,7 +1,7 @@
 # encoding: utf-8
 Gem::Specification.new do |gem|
   gem.name          = 'icontact'
-  gem.version       = '0.0.4'
+  gem.version       = '0.0.5'
   gem.authors       = ['Devin Turner']
   gem.email         = ['devin.turner09@gmail.com']
   gem.summary       = 'Ruby wrapper for the iContact API'

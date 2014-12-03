@@ -54,6 +54,8 @@ module IContact
       case response.status.to_i
       when 200..299
         response_success(response)
+      when 404
+        []
       else
         IContact::ErrorHandler.new(response)
       end

@@ -17,8 +17,6 @@ module IContact
 
   class IContact::PaymentRequest < IContactError; end
 
-  class IContact::ResourceNotFound < IContactError; end
-
   class IContact::MethodNotAllowed < IContactError; end
 
   class IContact::InsufficientSpace < IContactError; end
@@ -33,7 +31,6 @@ module IContact
       401 => IContact::NotAuthorized,
       402 => IContact::PaymentRequest,
       403 => IContact::Forbidden,
-      404 => IContact::ResourceNotFound,
       405 => IContact::MethodNotAllowed,
       406 => IContact::NotAcceptable,
       415 => IContact::UnsupportedMediaType,
