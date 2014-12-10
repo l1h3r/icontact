@@ -8,7 +8,7 @@ module IContact
         resource(response, 'customfield')
       end
 
-      def get_custom_fields(limit = 10000)
+      def get_custom_fields(limit = 1000)
         response = get(custom_fields_path + query(limit: limit))
         resource(response, 'customfields')
       end

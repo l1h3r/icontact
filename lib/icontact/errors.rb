@@ -43,7 +43,7 @@ module IContact
     def initialize(response)
       klass   = MAPPED_ERRORS[response.status.to_i]
       parsed  = Oj.load(response.body || '')
-      message = parsed.nil? ? '' : parsed['errors']
+      message = parsed.nil? ? '' : parsed
 
       if klass
         raise klass.new(message)

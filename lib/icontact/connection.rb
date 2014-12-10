@@ -13,7 +13,7 @@ module IContact
     end
 
     def post(path, data)
-      ensure_valid(data)
+      ensure_valid_data(data)
       request(:post, path, data)
     end
 

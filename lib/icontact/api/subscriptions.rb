@@ -8,7 +8,7 @@ module IContact
         resource(response, 'subscription')
       end
 
-      def get_subscriptions(limit = 10000)
+      def get_subscriptions(limit = 1000)
         response = get(subscriptions_path + query(limit: limit))
         resource(response, 'subscriptions')
       end

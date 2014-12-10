@@ -8,7 +8,7 @@ module IContact
         resource(response, 'user')
       end
 
-      def get_users(limit = 10000)
+      def get_users(limit = 1000)
         response = get(users_path + query(limit: limit))
         resource(response, 'users')
       end

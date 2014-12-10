@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    icontact (0.0.5)
+    icontact (0.0.6)
       faraday (~> 0.8)
       oj (~> 2.11)
 
