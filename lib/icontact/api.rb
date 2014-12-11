@@ -42,10 +42,9 @@ module IContact
     private
 
     def query(data)
-      query = data.map do |key, value|
+      data.map do |key, value|
         CGI.escape(key.to_s) + '=' + CGI.escape(value.to_s)
-      end.sort * '&'
-      "?#{query}"
+      end.sort.join('&').prepend('?')
     end
 
     def wrap(data)

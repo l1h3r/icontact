@@ -48,7 +48,7 @@ module IContact
 
       def find_contacts(data)
         ensure_valid_data(data)
-        data.merge!(limit: 1000) unless data.has_key?(:limit)
+        data.reverse_merge!(limit: 1000)
         response = get(contacts_path + query(data))
         resource(response, 'contacts')
       end

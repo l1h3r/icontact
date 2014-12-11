@@ -11,7 +11,7 @@ module IContact
 
   class IContact::NotAuthorized < IContactError; end
 
-  class IContact::InternalServer < IContactError; end
+  class IContact::InternalServerError < IContactError; end
 
   class IContact::NotImplemented < IContactError; end
 
@@ -34,7 +34,7 @@ module IContact
       405 => IContact::MethodNotAllowed,
       406 => IContact::NotAcceptable,
       415 => IContact::UnsupportedMediaType,
-      500 => IContact::InternalServer,
+      500 => IContact::InternalServerError,
       501 => IContact::NotImplemented,
       503 => IContact::ServiceUnavailable,
       507 => IContact::InsufficientSpace
