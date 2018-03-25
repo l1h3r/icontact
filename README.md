@@ -3,8 +3,7 @@
 
 Ruby Gem for iContact
 ---
-
-For more details, read the iContact API documentation: http://www.icontact.com/developerportal/
+`icontact` is a Ruby wrapper for the iContact API. For more details, read http://www.icontact.com/developerportal/.
 
 Installation
 ---
